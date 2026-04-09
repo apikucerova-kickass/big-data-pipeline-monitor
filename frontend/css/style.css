@@ -308,9 +308,6 @@ a:hover {
     border-bottom: 1px solid #252A3A;
 }
 
-.data-table thead th:last-child {
-    text-align: right;
-}
 
 .data-table tbody td {
     padding: 12px 20px;
@@ -319,9 +316,6 @@ a:hover {
     font-size: 14px;
 }
 
-.data-table tbody td:last-child {
-    text-align: right;
-}
 
 .data-table tbody tr:last-child td {
     border-bottom: none;
@@ -723,10 +717,6 @@ a:hover {
     border-bottom: 1px solid #252A3A;
 }
 
-.mini-table thead th:last-child {
-    text-align: right;
-}
-
 .mini-table tbody td {
     padding: 12px 20px;
     border-bottom: 1px solid #1E2130;
@@ -734,9 +724,6 @@ a:hover {
     font-size: 14px;
 }
 
-.mini-table tbody td:last-child {
-    text-align: right;
-}
 
 .mini-table tbody tr:last-child td {
     border-bottom: none;
