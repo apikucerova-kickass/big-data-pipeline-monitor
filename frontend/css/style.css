@@ -1,0 +1,831 @@
+/* ============================================
+   Big Data Pipeline Monitor — Dark Monitoring Theme
+   ============================================ */
+
+/* Reset a základní styly */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+    background: #0B0D14;
+    color: #E2E4E9;
+    min-height: 100vh;
+    display: flex;
+    font-size: 16px;
+}
+
+a {
+    color: #818CF8;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #A5B4FC;
+}
+
+/* ============================================
+   Sidebar navigace
+   ============================================ */
+.sidebar {
+    width: 220px;
+    min-width: 220px;
+    background: #0A0B10;
+    border-right: 1px solid #1E2130;
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    z-index: 100;
+}
+
+.sidebar-brand {
+    padding: 22px 18px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.sidebar-brand .status-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #22C55E;
+    box-shadow: 0 0 6px #22C55E88;
+}
+
+.sidebar-brand span {
+    font-size: 15px;
+    font-weight: 500;
+    letter-spacing: -0.2px;
+}
+
+.sidebar-section {
+    padding: 0 10px;
+}
+
+.sidebar-section-title {
+    font-size: 11px;
+    color: #9CA3AF;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: 18px 12px 8px;
+    font-weight: 500;
+}
+
+.sidebar-link {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 12px;
+    border-radius: 6px;
+    color: #6B7084;
+    font-size: 14px;
+    transition: all 0.15s;
+    margin-bottom: 2px;
+}
+
+.sidebar-link:hover {
+    background: #161822;
+    color: #C4C7D0;
+}
+
+.sidebar-link.active {
+    background: #1E2130;
+    color: #818CF8;
+    font-weight: 500;
+}
+
+.sidebar-link svg {
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+}
+
+.sidebar-link .badge {
+    margin-left: auto;
+    background: #3B1A3A;
+    color: #FCA5A5;
+    font-size: 11px;
+    padding: 2px 8px;
+    border-radius: 10px;
+    font-weight: 500;
+}
+
+.sidebar-user {
+    padding: 18px;
+    border-top: 1px solid #1E2130;
+    margin-top: auto;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.sidebar-user .avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: #1E2130;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    color: #818CF8;
+    font-weight: 500;
+}
+
+.sidebar-user .username {
+    font-size: 14px;
+    color: #9CA3AF;
+}
+
+/* ============================================
+   Hlavní obsah
+   ============================================ */
+.main-content {
+    flex: 1;
+    margin-left: 220px;
+    padding: 28px 32px;
+    min-height: 100vh;
+}
+
+.page-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 24px;
+}
+
+.page-header h1 {
+    font-size: 22px;
+    font-weight: 500;
+    letter-spacing: -0.3px;
+}
+
+.page-header .subtitle {
+    font-size: 14px;
+    color: #9CA3AF;
+    margin-top: 4px;
+}
+
+/* ============================================
+   Statistické kartičky
+   ============================================ */
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 12px;
+    margin-bottom: 24px;
+}
+
+.stat-card {
+    background: #1A1D2B;
+    border: 1px solid #252A3A;
+    border-radius: 10px;
+    padding: 18px 20px;
+}
+
+.stat-card .stat-label {
+    font-size: 13px;
+    color: #9CA3AF;
+    margin-bottom: 8px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+}
+
+.stat-card .stat-value {
+    font-size: 32px;
+    font-weight: 500;
+    letter-spacing: -1px;
+}
+
+.stat-card .stat-detail {
+    font-size: 13px;
+    color: #4ADE80;
+    margin-top: 4px;
+}
+
+.stat-card.stat-danger {
+    background: #231520;
+    border-color: #3B1A3A;
+}
+
+.stat-card.stat-danger .stat-label {
+    color: #F87171;
+}
+
+.stat-card.stat-danger .stat-value {
+    color: #FCA5A5;
+}
+
+.stat-card.stat-danger .stat-detail {
+    color: #FBBF24;
+}
+
+.stat-card.stat-warning {
+    background: #1F1D14;
+    border-color: #3A3516;
+}
+
+.stat-card.stat-warning .stat-label {
+    color: #FBBF24;
+}
+
+.stat-card.stat-warning .stat-value {
+    color: #FDE68A;
+}
+
+/* ============================================
+   Dvousloupcový layout (panely vedle sebe)
+   ============================================ */
+.panels-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 24px;
+}
+
+/* ============================================
+   Panel / karta
+   ============================================ */
+.panel {
+    background: #1A1D2B;
+    border: 1px solid #252A3A;
+    border-radius: 10px;
+}
+
+.panel-header {
+    padding: 16px 20px;
+    border-bottom: 1px solid #252A3A;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.panel-header h2 {
+    font-size: 15px;
+    color: #E2E4E9;
+    font-weight: 500;
+}
+
+.panel-header .panel-action {
+    font-size: 13px;
+    color: #818CF8;
+    cursor: pointer;
+}
+
+.panel-header .panel-action:hover {
+    color: #A5B4FC;
+}
+
+.panel-body {
+    padding: 16px 20px;
+}
+
+/* ============================================
+   Tabulky
+   ============================================ */
+.data-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+}
+
+.data-table thead th {
+    text-align: left;
+    padding: 12px 20px;
+    font-weight: 500;
+    color: #9CA3AF;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+    border-bottom: 1px solid #252A3A;
+}
+
+.data-table thead th:last-child {
+    text-align: right;
+}
+
+.data-table tbody td {
+    padding: 12px 20px;
+    border-bottom: 1px solid #1E2130;
+    color: #E2E4E9;
+    font-size: 14px;
+}
+
+.data-table tbody td:last-child {
+    text-align: right;
+}
+
+.data-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.data-table tbody tr:hover {
+    background: #1F2233;
+}
+
+.data-table .cell-name {
+    font-weight: 500;
+}
+
+.data-table .cell-muted {
+    color: #9CA3AF;
+}
+
+.data-table .cell-mono {
+    font-family: 'SF Mono', 'Cascadia Code', 'Fira Code', monospace;
+    color: #A5B4FC;
+}
+
+/* ============================================
+   Status badge (success, failed, running, pending, inactive)
+   ============================================ */
+.status-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+}
+
+.status-badge .status-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+}
+
+.status-badge.status-success .status-dot {
+    background: #22C55E;
+}
+
+.status-badge.status-success {
+    color: #4ADE80;
+}
+
+.status-badge.status-failed .status-dot {
+    background: #EF4444;
+}
+
+.status-badge.status-failed {
+    color: #FCA5A5;
+}
+
+.status-badge.status-running .status-dot {
+    background: #818CF8;
+    animation: pulse 2s infinite;
+}
+
+.status-badge.status-running {
+    color: #A5B4FC;
+}
+
+.status-badge.status-pending .status-dot {
+    background: #3B82F6;
+}
+
+.status-badge.status-pending {
+    color: #60A5FA;
+}
+
+.status-badge.status-inactive .status-dot {
+    background: #6B7084;
+}
+
+.status-badge.status-inactive {
+    color: #9CA3AF;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+}
+
+/* ============================================
+   Alert list (v panelu)
+   ============================================ */
+.alert-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 12px;
+    border-radius: 6px;
+    margin-bottom: 6px;
+}
+
+.alert-item:last-child {
+    margin-bottom: 0;
+}
+
+.alert-item.alert-critical {
+    background: #231520;
+}
+
+.alert-item.alert-warning {
+    background: #1F1D14;
+}
+
+.alert-item.alert-info {
+    background: #141827;
+}
+
+.alert-item .alert-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+.alert-item.alert-critical .alert-dot {
+    background: #EF4444;
+}
+
+.alert-item.alert-warning .alert-dot {
+    background: #FBBF24;
+}
+
+.alert-item.alert-info .alert-dot {
+    background: #818CF8;
+}
+
+.alert-item .alert-message {
+    font-size: 14px;
+    flex: 1;
+    color: #E2E4E9;
+}
+
+.alert-item .alert-time {
+    font-size: 12px;
+    color: #9CA3AF;
+}
+
+/* ============================================
+   Tlačítka
+   ============================================ */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 500;
+    border: none;
+    cursor: pointer;
+    transition: all 0.15s;
+}
+
+.btn-primary {
+    background: #818CF8;
+    color: #0F1117;
+}
+
+.btn-primary:hover {
+    background: #A5B4FC;
+}
+
+.btn-secondary {
+    background: #1E2130;
+    color: #E2E4E9;
+    border: 1px solid #2D3154;
+}
+
+.btn-secondary:hover {
+    background: #2D3154;
+}
+
+.btn-danger {
+    background: #7F1D1D;
+    color: #FCA5A5;
+}
+
+.btn-danger:hover {
+    background: #991B1B;
+}
+
+.btn-sm {
+    padding: 5px 12px;
+    font-size: 13px;
+}
+
+/* ============================================
+   Formuláře
+   ============================================ */
+.form-group {
+    margin-bottom: 16px;
+}
+
+.form-group label {
+    display: block;
+    font-size: 13px;
+    color: #9CA3AF;
+    margin-bottom: 6px;
+    font-weight: 500;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 10px 14px;
+    background: #0B0D14;
+    border: 1px solid #252A3A;
+    border-radius: 6px;
+    color: #E2E4E9;
+    font-size: 14px;
+    font-family: inherit;
+    transition: border-color 0.15s;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: #818CF8;
+}
+
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+    color: #4B4F63;
+}
+
+.form-group select option {
+    background: #0B0D14;
+    color: #E2E4E9;
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+}
+
+/* ============================================
+   Filtry
+   ============================================ */
+.filters {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+    align-items: center;
+}
+
+.filters select,
+.filters input {
+    padding: 8px 14px;
+    background: #1A1D2B;
+    border: 1px solid #252A3A;
+    border-radius: 6px;
+    color: #E2E4E9;
+    font-size: 13px;
+    font-family: inherit;
+}
+
+.filters select:focus,
+.filters input:focus {
+    outline: none;
+    border-color: #818CF8;
+}
+
+/* ============================================
+   Stavy stránky (loading, empty, error)
+   ============================================ */
+.state-loading,
+.state-empty,
+.state-error {
+    text-align: center;
+    padding: 48px 20px;
+    color: #9CA3AF;
+    font-size: 14px;
+}
+
+.state-loading .spinner {
+    width: 24px;
+    height: 24px;
+    border: 2px solid #252A3A;
+    border-top-color: #818CF8;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+    margin: 0 auto 12px;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+.state-error {
+    color: #FCA5A5;
+}
+
+/* ============================================
+   Detail stránky (pipeline detail, run detail)
+   ============================================ */
+.detail-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 24px;
+}
+
+.detail-header h1 {
+    font-size: 22px;
+    font-weight: 500;
+}
+
+.detail-meta {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 12px;
+    margin-bottom: 24px;
+}
+
+.detail-meta-item {
+    background: #1A1D2B;
+    border: 1px solid #252A3A;
+    border-radius: 8px;
+    padding: 14px 16px;
+}
+
+.detail-meta-item .meta-label {
+    font-size: 12px;
+    color: #9CA3AF;
+    margin-bottom: 4px;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+}
+
+.detail-meta-item .meta-value {
+    font-size: 15px;
+    font-weight: 500;
+}
+
+/* ============================================
+   Steps (kroky pipeline - extract, transform, load)
+   ============================================ */
+.steps-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.step-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 16px;
+    background: #1A1D2B;
+    border: 1px solid #252A3A;
+    border-radius: 6px;
+}
+
+.step-item .step-number {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: #252A3A;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    color: #9CA3AF;
+    font-weight: 500;
+}
+
+.step-item .step-name {
+    font-size: 14px;
+    font-weight: 500;
+    flex: 1;
+}
+
+/* ============================================
+   Mini tabulka (pro panely Stav pipeline a Alerty)
+   — stejný styl jako data-table
+   ============================================ */
+.mini-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+}
+
+.mini-table thead th {
+    text-align: left;
+    padding: 12px 20px;
+    font-weight: 500;
+    color: #9CA3AF;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+    border-bottom: 1px solid #252A3A;
+}
+
+.mini-table thead th:last-child {
+    text-align: right;
+}
+
+.mini-table tbody td {
+    padding: 12px 20px;
+    border-bottom: 1px solid #1E2130;
+    color: #E2E4E9;
+    font-size: 14px;
+}
+
+.mini-table tbody td:last-child {
+    text-align: right;
+}
+
+.mini-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.mini-table tbody tr:hover {
+    background: #1F2233;
+}
+
+/* ============================================
+   Modal / dialog
+   ============================================ */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 200;
+}
+
+.modal-overlay.hidden {
+    display: none;
+}
+
+.modal {
+    background: #1A1D2B;
+    border: 1px solid #252A3A;
+    border-radius: 10px;
+    padding: 24px;
+    width: 100%;
+    max-width: 480px;
+}
+
+.modal h2 {
+    font-size: 18px;
+    font-weight: 500;
+    margin-bottom: 20px;
+}
+
+.modal-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+    margin-top: 20px;
+}
+
+/* ============================================
+   Responsive (menší obrazovky)
+   ============================================ */
+@media (max-width: 900px) {
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .panels-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 700px) {
+    .sidebar {
+        width: 60px;
+        min-width: 60px;
+    }
+
+    .sidebar-brand span,
+    .sidebar-section-title,
+    .sidebar-link span,
+    .sidebar-link .badge,
+    .sidebar-user .username {
+        display: none;
+    }
+
+    .sidebar-link {
+        justify-content: center;
+        padding: 10px;
+    }
+
+    .main-content {
+        margin-left: 60px;
+        padding: 20px 16px;
+    }
+
+    .stats-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+}
