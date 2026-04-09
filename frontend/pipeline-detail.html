@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pipeline Monitor — Detail pipeline</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- Sidebar navigace -->
+    <nav id="sidebar" class="sidebar"></nav>
+
+    <!-- Hlavní obsah -->
+    <main class="main-content">
+        <div id="pipeline-detail-content">
+            <div class="state-loading">
+                <div class="spinner"></div>
+                Načítání...
+            </div>
+        </div>
+    </main>
+
+    <!-- Modal: Ukončit běh -->
+    <div id="finish-modal" class="modal-overlay hidden">
+        <div class="modal">
+            <h2>Ukončit běh</h2>
+            <div class="form-group">
+                <label>Výsledek</label>
+                <select id="finish-status">
+                    <option value="success">Úspěch</option>
+                    <option value="failed">Chyba</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Počet zpracovaných záznamů</label>
+                <input type="number" id="finish-records" placeholder="např. 5000">
+            </div>
+            <div class="form-group">
+                <label>Chybová zpráva (volitelné)</label>
+                <input type="text" id="finish-error" placeholder="Popis chyby...">
+            </div>
+            <div id="finish-error-msg" style="color: #FCA5A5; font-size: 13px; margin-bottom: 12px; display: none;"></div>
+            <div class="modal-actions">
+                <button class="btn btn-secondary" onclick="closeFinishModal()">Zrušit</button>
+                <button class="btn btn-primary" onclick="finishRun()">Ukončit</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Skripty -->
+    <script src="js/api.js"></script>
+    <script src="js/sidebar.js"></script>
+    <script src="js/pipeline-detail.js"></script>
+    <script>renderSidebar('pipelines');</script>
+</body>
+</html>
