@@ -46,8 +46,19 @@
                     <select id="pipeline-dataset"></select>
                 </div>
                 <div class="form-group">
-                    <label>Schedule (cron)</label>
-                    <input type="text" id="pipeline-schedule" placeholder="např. 0 2 * * *">
+                    <label>Plán spuštění</label>
+                    <select id="pipeline-schedule">
+                        <option value="">Bez plánu (ruční spuštění)</option>
+                        <option value="0 * * * *">Každou hodinu</option>
+                        <option value="0 */4 * * *">Každé 4 hodiny</option>
+                        <option value="0 1 * * *">Denně v 01:00</option>
+                        <option value="0 2 * * *">Denně v 02:00</option>
+                        <option value="0 3 * * *">Denně v 03:00</option>
+                        <option value="0 5 * * *">Denně v 05:00</option>
+                        <option value="0 6 * * *">Denně v 06:00</option>
+                        <option value="0 6 * * 1">Každé pondělí v 06:00</option>
+                        <option value="0 0 1 * *">Prvního v měsíci</option>
+                    </select>
                 </div>
             </div>
             <div id="create-error" style="color: #FCA5A5; font-size: 13px; margin-bottom: 12px; display: none;"></div>

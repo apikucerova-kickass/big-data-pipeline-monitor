@@ -8,11 +8,15 @@ function formatSchedule(cron) {
     if (!cron) return "—";
     
     const translations = {
-        "0 2 * * *": "Denně v 02:00",
+        "0 * * * *": "Každou hodinu",
         "0 */4 * * *": "Každé 4 hodiny",
-        "0 3 * * *": "Denně v 03:00",
-        "0 6 * * 1": "Každé pondělí v 06:00",
         "0 1 * * *": "Denně v 01:00",
+        "0 2 * * *": "Denně v 02:00",
+        "0 3 * * *": "Denně v 03:00",
+        "0 5 * * *": "Denně v 05:00",
+        "0 6 * * *": "Denně v 06:00",
+        "0 6 * * 1": "Každé pondělí v 06:00",
+        "0 0 1 * *": "Prvního v měsíci",
     };
     
     return translations[cron] || cron;
