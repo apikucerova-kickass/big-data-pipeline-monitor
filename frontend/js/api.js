@@ -5,7 +5,7 @@
 // ZMĚŇ toto na URL svého backendu
 // Lokálně: "http://localhost:8000"
 // Na Renderu: "https://tvoje-app.onrender.com"
-const API_URL = "http://localhost:8000";
+const API_URL = "https://pipeline-monitor-api.onrender.com";
 
 // GET požadavek — načtení dat
 async function apiGet(path) {
