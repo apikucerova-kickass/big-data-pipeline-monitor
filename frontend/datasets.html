@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pipeline Monitor — Datasety</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- Sidebar navigace -->
+    <nav id="sidebar" class="sidebar"></nav>
+
+    <!-- Hlavní obsah -->
+    <main class="main-content">
+        <div class="page-header">
+            <div>
+                <h1>Datasety</h1>
+                <p class="subtitle">Evidence datových zdrojů</p>
+            </div>
+            <button class="btn btn-primary" onclick="openCreateModal()">+ Nový dataset</button>
+        </div>
+
+        <div id="datasets-content">
+            <div class="state-loading">
+                <div class="spinner"></div>
+                Načítání...
+            </div>
+        </div>
+    </main>
+
+    <!-- Modal: Vytvořit dataset -->
+    <div id="create-modal" class="modal-overlay hidden">
+        <div class="modal">
+            <h2>Nový dataset</h2>
+            <div class="form-group">
+                <label>Název</label>
+                <input type="text" id="dataset-name" placeholder="např. customer_orders">
+            </div>
+            <div class="form-group">
+                <label>Popis</label>
+                <textarea id="dataset-description" rows="2" placeholder="Popis datového zdroje..."></textarea>
+            </div>
+            <div class="form-group">
+                <label>Vlastník (tým)</label>
+                <input type="text" id="dataset-owner" placeholder="např. analytics-team">
+            </div>
+            <div id="create-error" style="color: #FCA5A5; font-size: 13px; margin-bottom: 12px; display: none;"></div>
+            <div class="modal-actions">
+                <button class="btn btn-secondary" onclick="closeCreateModal()">Zrušit</button>
+                <button class="btn btn-primary" onclick="createDataset()">Vytvořit</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Skripty -->
+    <script src="js/api.js"></script>
+    <script src="js/sidebar.js"></script>
+    <script src="js/datasets.js"></script>
+    <script>renderSidebar('datasets');</script>
+</body>
+</html>

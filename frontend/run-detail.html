@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pipeline Monitor — Detail běhu</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- Sidebar navigace -->
+    <nav id="sidebar" class="sidebar"></nav>
+
+    <!-- Hlavní obsah -->
+    <main class="main-content">
+        <div id="run-detail-content">
+            <div class="state-loading">
+                <div class="spinner"></div>
+                Načítání...
+            </div>
+        </div>
+    </main>
+
+    <!-- Skripty -->
+    <script src="js/api.js"></script>
+    <script src="js/sidebar.js"></script>
+    <script src="js/run-detail.js"></script>
+    <script>renderSidebar('runs');</script>
+</body>
+</html>

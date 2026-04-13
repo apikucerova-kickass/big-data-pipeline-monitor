@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pipeline Monitor — Běhy</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- Sidebar navigace -->
+    <nav id="sidebar" class="sidebar"></nav>
+
+    <!-- Hlavní obsah -->
+    <main class="main-content">
+        <div class="page-header">
+            <div>
+                <h1>Běhy</h1>
+                <p class="subtitle">Přehled všech běhů pipeline</p>
+            </div>
+        </div>
+
+        <!-- Filtry -->
+        <div class="filters">
+            <select id="filter-pipeline" onchange="loadRuns()">
+                <option value="">Všechny pipeline</option>
+            </select>
+            <select id="filter-status" onchange="loadRuns()">
+                <option value="">Všechny stavy</option>
+                <option value="running">Běží</option>
+                <option value="success">Úspěch</option>
+                <option value="failed">Chyba</option>
+                <option value="pending">Čeká</option>
+            </select>
+        </div>
+
+        <div id="runs-content">
+            <div class="state-loading">
+                <div class="spinner"></div>
+                Načítání...
+            </div>
+        </div>
+    </main>
+
+    <!-- Skripty -->
+    <script src="js/api.js"></script>
+    <script src="js/sidebar.js"></script>
+    <script src="js/runs.js"></script>
+    <script>renderSidebar('runs');</script>
+</body>
+</html>
