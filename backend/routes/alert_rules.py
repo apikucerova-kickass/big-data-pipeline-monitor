@@ -1,7 +1,8 @@
 from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel
 from typing import Optional
-from database import supabase_get, supabase_post
+from database import supabase_get
+from services.alert_service import create_alert_rule
 
 router = APIRouter()
 
@@ -13,23 +14,8 @@ class AlertRuleCreate(BaseModel):
 
 # POST /alert-rules — vytvoření nového pravidla
 @router.post("/")
-def create_alert_rule(rule: AlertRuleCreate):
-    if not rule.name.strip():
-        raise HTTPException(status_code=400, detail="Název pravidla nesmí být prázdný")
-
-    # Ověření, že pipeline existuje
-    p = supabase_get("pipelines", {"id": f"eq.{rule.pipeline_id}"})
-    if not p:
-        raise HTTPException(status_code=400, detail="Pipeline neexistuje")
-
-    result = supabase_post("alert_rules", {
-        "pipeline_id": rule.pipeline_id,
-        "name": rule.name,
-        "condition": rule.condition,
-        "enabled": rule.enabled
-    })
-
-    return result[0]
+def create_alert_rule_route(rule: AlertRuleCreate):
+    return create_alert_rule(rule.model_dump())
 
 # GET /alert-rules — seznam všech pravidel
 @router.get("/")
