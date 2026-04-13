@@ -30,6 +30,15 @@ def create_pipeline(data: dict):
         "active": data.get("active", True)
     })
 
+    # Automaticky vytvořit alert pravidlo pro novou pipeline
+    pipeline_id = result[0]["id"]
+    supabase_post("alert_rules", {
+        "pipeline_id": pipeline_id,
+        "name": f"Fail alert pro {data['name']}",
+        "condition": "status == failed",
+        "enabled": True
+    })
+
     return result[0]
 
 
